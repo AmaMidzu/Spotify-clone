@@ -22,6 +22,8 @@
     <meta charset="utf-8">
     <title>Welcome to Spotify</title>
     <link rel="stylesheet" href="assets/css/register.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="assets/js/register.js"></script>
   </head>
   <body>
     <div id="background">
