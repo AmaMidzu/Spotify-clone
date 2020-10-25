@@ -21,7 +21,22 @@ if (isset($_SESSION['userLoggedIn'])) {
     <div id="nowPlayingBarContainer">
       <div id="nowPlayingBar">
         <div id="nowPlayingLeft">
+          <div class="content">
+            <span class="albumLink">
+              <img class="albumArtwork" src="https://fsa.zobj.net/crop.php?r=jzGAdAdORK7Lba21zrOYW6iPtIPdLbwDHG3veXwTIU9vyPbiSnF8ZA4qePsM7RdIAAiJzZuJUfvx5F_4cUowhTcfNJg-TFZYuTFzackMVnoE6U__xy7SnQHX5GiLs-JWsxDI20zRjgjgYYOc">
+            </span>
+            <div class="trackInfo">
 
+              <span class="trackName">
+                <span>Default song</span>
+              </span>
+
+              <span class="artistName">
+                <span>Default artist</span>
+              </span>
+
+            </div>
+          </div>
         </div>
 
         <div id="nowPlayingCenter">
@@ -69,7 +84,18 @@ if (isset($_SESSION['userLoggedIn'])) {
         </div>
 
         <div id="nowPlayingRight">
+          <div class="volumeBar">
 
+            <button class="controlButton volume" title="Volume button">
+              <img src="assets/images/icons/volume.png" alt="Volume">
+            </button>
+            <div class="progressBar">
+              <div class="progressBarBg">
+                <div class="progress"></div>
+              </div>
+            </div>
+
+          </div>
         </div>
 
       </div>
