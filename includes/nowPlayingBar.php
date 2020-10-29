@@ -18,7 +18,26 @@ $jsonArray = json_encode($resultArray);
   });
 
   function setTrack(trackId, newPlaylist, play) {
-    audioElement.setTrack("assets/music/bensound-clearday.mp3");
+    $.post("includes/handlers/ajax/getSongJson.php", { songId: trackId }, function(data) {
+      var track = JSON.parse(data);
+
+      $(".trackName span").text(track.title);
+
+      $.post("includes/handlers/ajax/getArtistJson.php", { artistId: track.artist}, function(data) {
+        var artist = JSON.parse(data);
+
+        $(".artistName span").text(artist.name)
+      });
+
+      $.post("includes/handlers/ajax/getAlbumJson.php", { albumId: track.album}, function(data) {
+        var album = JSON.parse(data);
+
+        $(".albumLink img").attr("src", album.artworkPath)
+      });
+
+      audioElement.setTrack(track.path);
+      // audioElement.play();
+    });
     if (play) {
       audioElement.play();
     }
@@ -43,12 +62,12 @@ $jsonArray = json_encode($resultArray);
     <div id="nowPlayingLeft">
       <div class="content">
         <span class="albumLink">
-          <img class="albumArtwork" src="https://fsa.zobj.net/crop.php?r=jzGAdAdORK7Lba21zrOYW6iPtIPdLbwDHG3veXwTIU9vyPbiSnF8ZA4qePsM7RdIAAiJzZuJUfvx5F_4cUowhTcfNJg-TFZYuTFzackMVnoE6U__xy7SnQHX5GiLs-JWsxDI20zRjgjgYYOc">
+          <img class="albumArtwork" src="">
         </span>
         <div class="trackInfo">
 
           <span class="trackName">
-            <span>Default song</span>
+            <span></span>
           </span>
 
           <span class="artistName">
