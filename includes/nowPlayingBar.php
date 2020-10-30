@@ -15,7 +15,61 @@ $jsonArray = json_encode($resultArray);
     currentPlaylist = <?php echo $jsonArray; ?>;
     audioElement = new Audio();
     setTrack(currentPlaylist[0], currentPlaylist, false);
+    updateVolumeProgressBar(audioElement.audio); //not sure it's great UX
+
+    $("#nowPlayingBarContainer").on("mousedown touchstart mousemove touchmove", function(e) {
+      e.preventDefault();
+    });
+
+    $(".playbackBar .progressBar").mousedown(function() {
+      mouseDown = true;
+    });
+
+    $(".playbackBar .progressBar").mousemove(function(e) {
+      if (mouseDown) {
+        timeFromOffset(e, this);
+      }
+    });
+
+    $(".playbackBar .progressBar").mouseup(function(e) {
+      timeFromOffset(e, this);
+    });
+
+
+    $(".volumeBar .progressBar").mousedown(function() {
+      mouseDown = true;
+    });
+
+    $(".volumeBar .progressBar").mousemove(function(e) {
+      if (mouseDown) {
+        var percentage = e.offsetX / $(this).width();
+
+        if (percentage >= 0 && percentage <= 1) {
+          audioElement.audio.volume = percentage;
+        }
+      }
+    });
+
+    $(".volumeBar .progressBar").mouseup(function(e) {
+      var percentage = e.offsetX / $(this).width();
+
+      if (percentage >= 0 && percentage <= 1) {
+        audioElement.audio.volume = percentage;
+      }
+    });
+
+
+    $(document).mouseup(function() {
+      mouseDown = false;
+    });
+
   });
+
+  function timeFromOffset(mouse, progressBar) {
+    var percentage = mouse.offsetX / $(progressBar).width() * 100; //just for clarity that it's fraction
+    var seconds = audioElement.audio.duration * (percentage / 100);
+    audioElement.setTime(seconds);
+  }
 
   function setTrack(trackId, newPlaylist, play) {
     $.post("includes/handlers/ajax/getSongJson.php", { songId: trackId }, function(data) {
@@ -35,8 +89,8 @@ $jsonArray = json_encode($resultArray);
         $(".albumLink img").attr("src", album.artworkPath)
       });
 
-      audioElement.setTrack(track.path);
-      // audioElement.play();
+      audioElement.setTrack(track);
+      playSong();
     });
     if (play) {
       audioElement.play();
@@ -44,6 +98,9 @@ $jsonArray = json_encode($resultArray);
   }
 
   function playSong() {
+    if (audioElement.audio.currentTime == 0) {
+      $.post("includes/handlers/ajax/updatePlays.php", { songId: audioElement.currentlyPlaying.id });
+    }
     $(".controlButton.play").hide();
     $(".controlButton.pause").show();
     audioElement.play();
