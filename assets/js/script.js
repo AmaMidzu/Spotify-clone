@@ -1,8 +1,11 @@
-var cuurentPlaylist = [];
+var currentPlaylist = []; // worked without declaring?!
+var shufflePlaylist = [];
+var tempPlaylist = [];
 var audioElement;
 var mouseDown = false;
 var currentIndex = 0;
 var repeat = false;
+var shuffle = false;
 
 function formatTime(seconds) {
   var time = Math.round(seconds);
