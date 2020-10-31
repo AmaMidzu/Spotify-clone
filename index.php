@@ -1,4 +1,6 @@
-<?php include("includes/header.php"); ?>
+<?php
+include("includes/includedFiles.php");
+?>
 
 <h1 class="pageHeadingBig">You might also like</h1>
 
@@ -9,7 +11,7 @@
 
     while($row = mysqli_fetch_array($albumQuery)) {
       echo "<div class='gridViewItem'>
-        <a  href='album.php?id=" . $row['id'] . "'>
+        <span role='link' tabindex='0' onclick='openPage(\"album.php?id=" . $row['id'] . "\")'>
           <img src='" . $row['artworkPath'] . "'>
 
           <div class='gridViewInfo'>"
@@ -17,11 +19,9 @@
             . $row['title'] .
 
           "</div>
-        </a>
+        </span>
 
       </div>";
     }
    ?>
 </div>
-
-<?php include("includes/footer.php"); ?>

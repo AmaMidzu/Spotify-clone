@@ -166,11 +166,10 @@ $jsonArray = json_encode($resultArray);
       });
 
       audioElement.setTrack(track);
-      playSong();
+      if (play) {
+        playSong();
+      }
     });
-    if (play) {
-      audioElement.play();
-    }
   }
 
   function playSong() {
