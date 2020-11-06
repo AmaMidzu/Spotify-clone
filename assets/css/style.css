@@ -390,3 +390,40 @@ body {
 [role="link"] {
   cursor: pointer;
 }
+
+.searchContainer {
+  background-color: #242424;
+  padding: 20px 28px;
+}
+
+.searchContainer h4 {
+  margin: 0;
+  font-weight: 300;
+}
+
+.searchContainer .searchInput {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  font-size: 40px; /* adjusted, so padding needs to be adjusted too */
+  letter-spacing: 2px;
+}
+
+/* should not be used if want accessibility
+input:focus {
+  outline: none;
+} */
+
+.searchResultRow {
+  padding: 15px 10px;
+}
+
+.searchResultRow:hover {
+  background-color: #282828;
+}
+
+.searchResultRow .artistName span {
+  color: #fff;
+}
