@@ -5,7 +5,7 @@
     $playlistId = $_POST['playlistId'];
     $songId = $_POST['songId'];
 
-    $orderQuery = mysqli_query($con, "SELECT MAX(playlistOrder) + 1 AS playlistOrder FROM playlistSongs WHERE playlistId='$playlistId'");
+    $orderQuery = mysqli_query($con, "SELECT IFNULL(MAX(playlistOrder) + 1, 1) AS playlistOrder FROM playlistSongs WHERE playlistId='$playlistId'");
     $row = mysqli_fetch_array($orderQuery);
     $order = $row['playlistOrder'];
 
