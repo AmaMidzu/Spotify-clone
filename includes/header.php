@@ -34,7 +34,7 @@ if (isset($_SESSION['userLoggedIn'])) {
     <div id="mainContainer">
 
       <div id="topContainer">
-        <<?php include("includes/navBarContainer.php"); ?>
+        <?php include("includes/navBarContainer.php"); ?>
 
         <div id="mainViewContainer">
 
