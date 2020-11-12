@@ -74,5 +74,4 @@ $artist = $album->getArtist();
 
   <?php echo Playlist::getPlaylistsDropdown($con, $userLoggedIn->getUsername()); ?>
 
-  <div class="item">Copy song link</div>
 </nav>
