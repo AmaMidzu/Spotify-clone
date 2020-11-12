@@ -21,6 +21,24 @@ $(window).scroll(function() {
   hideOptionsMenu();
 });
 
+$(document).on("change", "select.playlist", function(){
+  var select = $(this);
+  var playlistId = select.val(); // $(this) == playlist id from <option> in the returned <select>
+  var songId = select.prev(".songId").val(); //hidden input in optionsMenu. prev() == class ancestor
+
+  $.post("includes/handlers/ajax/addToPlaylist.php", { playlistId: playlistId, songId: songId })
+  .done(function(error) {
+
+    if (error != "") {
+      alert(error);
+      return;
+    }
+
+    hideOptionsMenu();
+    select.val(""); // == <select>. Resetting the value to default for next use.
+  });
+});
+
 function openPage(url) {
 
   if (timer != null) {
@@ -76,9 +94,10 @@ function hideOptionsMenu() {
 }
 
 function showOptionsMenu(button) {
-
+  var songId = $(button).prevAll(".songId").val();
   var menu = $(".optionsMenu");
   var menuWidth = menu.width();
+  menu.find(".songId").val(songId); //assigns the value of song ID in hidden input in optionsMenu
 
   var scrollTop = $(window).scrollTop(); // Distance from top of window to top of document
   var elementOffset = $(button).offset().top; // distance from top of document
