@@ -54,6 +54,20 @@ function openPage(url) {
   history.pushState(null, null, url);
 }
 
+function removeFromPlaylist(button, playlistId) {
+  var songId = $(button).prevAll(".songId").val();
+
+  $.post("includes/handlers/ajax/removeFromPlaylist.php", { playlistId: playlistId, songId: songId })
+  .done(function(error) { // for deferreds
+
+    if (error != "") {
+      alert(error);
+      return;
+    }
+    openPage("playlist.php?id=" + playlistId);
+  });
+}
+
 function createPlaylist() {
   // improve
   var popup = prompt("Please enter the name of your playlist");
@@ -82,7 +96,7 @@ function deletePlaylist(playlistId) {
         return;
       }
       openPage("yourMusic.php");
-    })
+    });
   }
 }
 

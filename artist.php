@@ -102,5 +102,4 @@ $artist = new Artist($con, $artistId);
 
   <?php echo Playlist::getPlaylistsDropdown($con, $userLoggedIn->getUsername()); ?>
 
-  <div class="item">Copy song link</div>
 </nav>

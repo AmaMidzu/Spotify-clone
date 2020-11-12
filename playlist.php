@@ -77,5 +77,5 @@ $owner = new User($con, $playlist->getOwner());
 
   <?php echo Playlist::getPlaylistsDropdown($con, $userLoggedIn->getUsername()); ?>
 
-  <div class="item">Copy song link</div>
+  <div class="item" onclick="removeFromPlaylist(this, '<?php echo $playlistId; ?>')">Remove from playlist</div>
 </nav>
